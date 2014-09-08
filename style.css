@@ -1,68 +1,117 @@
 body {
 	font-family: sans-serif;
 	font-weight: thin;
+	color: #717574;
 	width: 800px;
 	margin: auto;
 }
 
+#save a {
+	text-decoration: none;
+	color: #717574;
+}
+
 canvas {
-	border: 2px solid black;
+	margin: auto;
+	border: 2px solid #717574;
+}
+
+#canvasDiv {
+
+}
+.tool-button {
+	display: inline-block;
+	width: 30px;
+	font-size: 1.4em;
+}
+
+#admins {
+	display: block;
+	width: 300px;
+	margin: 0px auto;
+}
+
+.admin-button {
+	text-align: center;
+	display: inline;
+	width: 30px;
+	font-size: 1.7em;
+	margin: 0px .7em;
+}
+
+#save a:hover,
+.admin-button:hover {
+	color: #9821DE;
 }
 
 .color-button {
 	display: inline-block;
 	width: 60px;
-	height: 1em;
-	margin-right: .2em;
+	height: 1.75em;
 }
 
 .size-button {
 	display: inline-block;
-	background-color: #000;
-	margin: auto .5em;
+	width: 30px;
 }
 
+.current-option {
+	border: 2px solid #9821DE;
+	box-shadow: 0 0 0 2px #fff inset;
+}
 
 #options {
 	display: block;
-	margin: 10px auto;
+	width: 600px;
+	margin: 10px 0px;
+	padding: 5px 0px;
+	position: relative;
+}
+
+#tools {
+	display: inline;
+	position: relative;
+	text-align: center;
+	margin-right: .5em;
 }
 
 #colors {
 	display: inline;
 	position: relative;
+	padding: 5px 0px;
 }
 
 #sizes {
 	display: inline;
 	position: relative;
-	margin-left: 1em;
+	margin-left: .5em;
+	text-align: center;
 }
 
-#small {
-	border-radius: 8px;
-	height: 8px;
-	width: 8px;
+#size-two {
+	font-size: .7em;
 }
 
-#normal {
-	border-radius: 12px;
+#size-five {
+	font-size: 1em;
+	/*border-radius: 12px;
 	height: 12px;
-	width: 12px;
+	width: 12px;*/
 }
 
-#large {
-	border-radius: 15px;
+#size-ten {
+	font-size: 1.3em;
+/*	border-radius: 15px;
 	height: 15px;
-	width: 15px;
+	width: 15px;*/
 }
 
-#huge {
-	border-radius: 18px;
+#size-twenty {
+	font-size: 1.6em;
+	/*border-radius: 18px;
 	height: 18px;
-	width: 18px;
+	width: 18px;*/
 }
-
 
 #green {
 	background-color: #06FF0C;
