@@ -2,10 +2,27 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<script type="text/javascript" src="canas.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="canvas.js"></script>
 	<title>Draw With Me</title>
 </head>
 <body>
-	<div id="canvasDiv"></div>
+	<div id="options">
+		<div id="colors">
+			<div class="color-button" id="green"></div>
+			<div class="color-button" id="gray"></div>
+			<div class="color-button" id="pink"></div>
+			<div class="color-button" id="orange"></div>
+			<div class="color-button" id="blue"></div>
+		</div>
+		<div id="sizes">
+			<div class="size-button" id="small"></div>
+			<div class="size-button" id="normal"></div>
+			<div class="size-button" id="large"></div>
+			<div class="size-button" id="huge"></div>
+		</div>
+	</div>
+
+	<div class="color-button" id="canvasDiv"></div>
 </body>
 </html>
