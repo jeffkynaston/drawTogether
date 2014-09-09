@@ -1,16 +1,14 @@
 window.onload=function(){
 	createCanvas(mainCanvas)
 	bindListeners()
+	createPencilGradient()
+	updateCursor("\uf1fc")
 };
 
 var mainCanvas = {
 	"width": "600px",
 	"height": "600px"
 }
-
-var crayonTextureImage = new Image();
-crayonTextureImage.src = "images/crayon-texture.png";
-
 var pointsDrawn = []
 var	unDoPointStore = []
 
@@ -100,48 +98,37 @@ function addClick(x, y, dragging) {
 										"color": curColor,
 										"size": curSize,
 										"tool": curTool})
-  clickX.push(x);
-  clickY.push(y);
-  clickDrag.push(dragging);
-  if(curTool == "eraser"){
-    clickColor.push("white");
-  }else{
-    clickColor.push(curColor);
-  }
-  console.log(curColor)
-  clickColor.push(curColor);
-  clickSize.push(curSize);
 }
 
 
 function redraw(){
-  context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
+  context.clearRect(0, 0, context.canvas.width, context.canvas.height);
   context.lineJoin = "round";
 			
 
   for(i=0; i < pointsDrawn.length; i++) {		
-    context.beginPath();
-    if(pointsDrawn[i]["dragged?"] && i){
-      context.moveTo(pointsDrawn[i-1].x, pointsDrawn[i-1].y);
-     }
-     else{
-       context.moveTo(pointsDrawn[i].x-1, pointsDrawn[i].y);
-     }
-		 var radius = pointsDrawn[i].size
-     context.strokeStyle = pointsDrawn[i].color
-     if(pointsDrawn[i].tool == "eraser") {
-     context.strokeStyle = "#fff"
-  	 }
-     context.lineWidth = radius;
-     context.lineTo(pointsDrawn[i].x, pointsDrawn[i].y);
-     context.closePath();
-     context.stroke();
+  	context.beginPath();
+  	if(pointsDrawn[i]["dragged?"] && i){
+  		context.moveTo(pointsDrawn[i-1].x, pointsDrawn[i-1].y);
+  	}
+  	else{
+  		context.moveTo(pointsDrawn[i].x-1, pointsDrawn[i].y);
+  	}
+
+  	context.strokeStyle = pointsDrawn[i].color
+  	if(pointsDrawn[i].tool == "eraser") {
+  		context.strokeStyle = "#fff"
+  	}
+  	if(pointsDrawn[i].tool == "pencil") {
+      context.strokeStyle = grd;
+  	}
+  	
+  	context.lineWidth = pointsDrawn[i].size
+  	context.lineTo(pointsDrawn[i].x, pointsDrawn[i].y);
+  	context.closePath();
+  	context.stroke();
   }
-  if(curTool == "pencil") {
-    context.globalAlpha = 0.4;
-    context.drawImage(crayonTextureImage, 0, 0, mainCanvas.width, mainCanvas.height);
-  }
-  context.globalAlpha = 1;
+  
 
   saveDrawing()
 }
@@ -181,4 +168,19 @@ function saveDrawing() {
 	var imgdata = canvas.toDataURL('image/png');
 	var newdata = imgdata.replace(/^data:image\/png/,'data:application/octet-stream');    
 	$('#save').find('a').attr('download','drawwithme.png').attr('href',newdata);
+}
+
+function createPencilGradient() {
+	grd = context.createLinearGradient(0, 0, canvas.width, canvas.height);
+	      
+	grd.addColorStop(0, '#717574');
+	for (i=1;i<49;i++) {
+		grd.addColorStop(((i*0.02)-0.01),'#FFF');   
+		
+	}
+	for (i=0;i<49;i++) {
+		grd.addColorStop((i*0.02), 'rgba(113,117,116,.06');   
+	}
+
+	grd.addColorStop(1, '#717574');
 }

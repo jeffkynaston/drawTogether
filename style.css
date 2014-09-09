@@ -55,8 +55,13 @@ canvas {
 	width: 30px;
 }
 
-.current-option {
-	border: 2px solid #9821DE;
+.current-option-tool,
+.current-option-size {
+	color: #9821DE;
+}
+
+.current-option-color {
+	border-bottom: 3px solid #9821DE;
 	box-shadow: 0 0 0 2px #fff inset;
 }
 
