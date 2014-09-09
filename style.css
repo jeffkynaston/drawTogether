@@ -42,6 +42,7 @@ canvas {
 #save a:hover,
 .admin-button:hover {
 	color: #9821DE;
+  cursor:pointer;
 }
 
 .color-button {
