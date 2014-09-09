@@ -70,38 +70,21 @@ function bindMoveMouse() {
 });
 }
 
-// function bindMouseDown() {
-// 	$('#canvas').mousedown(function(e){
-//   var mouseX = e.pageX - this.offsetLeft;
-//   var mouseY = e.pageY - this.offsetTop;
-//   paint = true;
-//   socket.emit('drawPoint', {"x": mouseX, "y": mouseY, "dragged": false});
-// });
-// }
-
-// function bindMoveMouse() {
-// 	$('#canvas').mousemove(function(e){
-//   if(paint){
-//   	socket.emit('drawPoint', {"x": e.pageX - this.offsetLeft, "y": e.pageY - this.offsetTop, "dragged": false});
-//     addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
-//     redraw();
-//   }
-// });
-// }
-
-
-
 function bindMouseUp() {
 	$('#canvas').mouseup(function(e){
-		socket.emit('drawPoint', {"pointsDrawn": pointsDrawn, "undoPointStore": undoPointStore});
   	paint = false;
+		_.each(pointsDrawn, function(point){ point["stored?"] = true });
+  	_.each(undoPointStore, function(point){ point["stored?"] = true });
+		socket.emit('drawPoint', {"pointsDrawn": pointsDrawn, "undoPointStore": undoPointStore});
 	});
 }
 
 function bindMouseLeave() {
-	$('#canvas').mouseleave(function(e){
-		socket.emit('drawPoint', {"pointsDrawn": pointsDrawn, "undoPointStore": undoPointStore});
+	$('#canvas').mouseup(function(e){
   	paint = false;
+		_.each(pointsDrawn, function(point){ point["stored?"] = true });
+  	_.each(undoPointStore, function(point){ point["stored?"] = true });
+		socket.emit('drawPoint', {"pointsDrawn": pointsDrawn, "undoPointStore": undoPointStore});
 	});
 }
 
@@ -114,7 +97,8 @@ function addClick(x, y, dragging) {
 										"dragged?": dragging,
 										"color": curColor,
 										"size": curSize,
-										"tool": curTool})
+										"tool": curTool,
+										"stored?": false})
 }
 
 
@@ -145,7 +129,6 @@ function redraw(){
   	context.closePath();
   	context.stroke();
   }
-  
 
   saveDrawing()
 }
@@ -162,6 +145,8 @@ function unDo() {
 		}
 		undoPointStore.push(pointsDrawn.pop())
 	}
+	_.each(pointsDrawn, function(point){ point["stored?"] = true });
+  _.each(undoPointStore, function(point){ point["stored?"] = true });
 	socket.emit('drawPoint', {"pointsDrawn": pointsDrawn, "undoPointStore": undoPointStore});
 }
 
@@ -173,6 +158,8 @@ function reDo() {
 		}
 		pointsDrawn.push(undoPointStore.pop())
 	}
+	_.each(pointsDrawn, function(point){ point["stored?"] = true });
+  _.each(undoPointStore, function(point){ point["stored?"] = true });
 	socket.emit('drawPoint', {"pointsDrawn": pointsDrawn, "undoPointStore": undoPointStore});
 
 }
@@ -182,6 +169,8 @@ function clearDrawing() {
 		undoPointStore.push(pointsDrawn.pop())
 	}
 	pointsDrawn.length = 0
+	_.each(pointsDrawn, function(point){ point["stored?"] = true });
+  _.each(undoPointStore, function(point){ point["stored?"] = true });
 	socket.emit('drawPoint', {"pointsDrawn": pointsDrawn, "undoPointStore": undoPointStore});
 }
 

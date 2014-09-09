@@ -25,20 +25,7 @@ function init() {
   });
 
   socket.on('redrawFrame', function (data) { 
-      pointsDrawn = data.pointsDrawn
-      undoPointStore = data.undoPointStore
-      redraw();
-  });
-
-  socket.on('updateClientOptions', function (data) { 
-      pointsDrawn = data.pointsDrawn
-      console.log(data)
-      curColor = data.curColor
-      curTool = data.curTool
-      curSize = data.curSize
-      updateCurrentTool()
-      updateCurrentColor()
-      updateCurrentSize()
+      combinePointArrays(data)
       redraw();
   });
 
@@ -102,3 +89,31 @@ function init() {
 }
 
 $(document).on('ready', init);
+
+
+function combinePointArrays(data) {
+  var regularPointHolder = []
+  var undoPointHolder = []
+  // set master arrays equal to server array
+  // add unstored points back to master array
+  _.each(pointsDrawn, function(point){ 
+    if (point["stored?"] = false) {
+      regularPointHolder.push(point)
+    }
+  });
+   _.each(undoPointStore, function(point){ 
+    if (point["stored?"] = false) {
+      undoPointHolder.push(point)
+    }
+  });
+  console.log(regularPointHolder)
+  console.log(undoPointHolder)
+  pointsDrawn = data.pointsDrawn
+  undoPointStore = data.undoPointStore
+  _.each(regularPointHolder, function(point){ 
+    pointsDrawn.push(point)
+  });
+   _.each(undoPointHolder, function(point){ 
+      undopointStore.push(point)
+  });
+}
