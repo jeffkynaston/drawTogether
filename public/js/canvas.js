@@ -12,19 +12,13 @@ var mainCanvas = {
 var pointsDrawn = []
 var	undoPointStore = []
 var paint;
-
 var colorGreen = "#06FF0C";
 var colorGray = "#717574";
 var colorPink = "#FF0D61";
 var colorOrange = "#FF5000";
 var colorBlue = "#12BAFF";
 var curColor = colorBlue;
-var clickColor = new Array();
-
-var clickSize = new Array();
 var curSize = 5
-
-var clickTool = new Array();
 var curTool = "pen";
 
 function createCanvas(thisCanvas) {
@@ -88,9 +82,6 @@ function bindMouseLeave() {
 	});
 }
 
-
-
-
 function addClick(x, y, dragging) {
 	pointsDrawn.push({"x": x,
 										"y": y,
@@ -129,7 +120,6 @@ function redraw(){
   	context.closePath();
   	context.stroke();
   }
-
   saveDrawing()
 }
 
@@ -181,16 +171,9 @@ function saveDrawing() {
 }
 
 function createPencilGradient() {
-	grd = context.createLinearGradient(0, 0, canvas.width, canvas.height);
-	      
+	grd = context.createLinearGradient(0, 0, canvas.width, canvas.height);		
 	grd.addColorStop(0, '#717574');
-	for (i=1;i<49;i++) {
-		grd.addColorStop(((i*0.02)-0.01),'#FFF');   
-		
-	}
-	for (i=0;i<49;i++) {
-		grd.addColorStop((i*0.02), 'rgba(113,117,116,.06');   
-	}
-
+	for (i=1;i<49;i++) { grd.addColorStop(((i*0.02)-0.01),'#FFF'); }
+	for (i=0;i<49;i++) { grd.addColorStop((i*0.02), 'rgba(113,117,116,.05'); }
 	grd.addColorStop(1, '#717574');
 }

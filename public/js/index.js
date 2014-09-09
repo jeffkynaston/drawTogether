@@ -4,7 +4,6 @@ function init() {
   socket = io.connect(serverBaseUrl);
   var sessionId = '';
 
-  //Helper function to update the participants' list
   function updateParticipants(participants) {
    $('#participants').html('');
    for (var i = 0; i < participants.length; i++) {
@@ -80,7 +79,6 @@ function init() {
     socket.emit('nameChange', {id: sessionId, name: name});
   }
 
-  /* Elements setup */
   $('#outgoingMessage').on('keydown', outgoingMessageKeyDown);
   $('#outgoingMessage').on('keyup', outgoingMessageKeyUp);
   $('#name').on('focusout', nameFocusOut);
@@ -94,8 +92,6 @@ $(document).on('ready', init);
 function combinePointArrays(data) {
   var regularPointHolder = []
   var undoPointHolder = []
-  // set master arrays equal to server array
-  // add unstored points back to master array
   _.each(pointsDrawn, function(point){ 
     if (point["stored?"] = false) {
       regularPointHolder.push(point)
@@ -106,8 +102,6 @@ function combinePointArrays(data) {
       undoPointHolder.push(point)
     }
   });
-  console.log(regularPointHolder)
-  console.log(undoPointHolder)
   pointsDrawn = data.pointsDrawn
   undoPointStore = data.undoPointStore
   _.each(regularPointHolder, function(point){ 

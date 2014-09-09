@@ -6,21 +6,9 @@ var express = require("express")
   , _ = require("underscore");
 
 var participants = [];
-var mainCanvas = {
-	"width": "600px",
-	"height": "450px"
-}
 var pointsDrawn = []
 var	undoPointStore = []
-var paint;
-var colorGreen = "#06FF0C";
-var colorGray = "#717574";
-var colorPink = "#FF0D61";
-var colorOrange = "#FF5000";
-var colorBlue = "#12BAFF";
-var curColor = colorBlue;
-var curSize = 5
-var curTool = "pen";
+
 
 app.set('port', process.env.PORT || 8080);
 app.use(bodyParser.json());
@@ -52,7 +40,7 @@ io.on("connection", function(socket){
   
   socket.on("newUser", function(data) {
     participants.push({id: data.id, name: data.name});
-    io.sockets.emit("newConnection", {participants: participants, pointsDrawn: pointsDrawn});
+    io.sockets.emit("newConnection", {participants: participants, pointsDrawn: pointsDrawn, undoPointStore: undoPointStore});
   });
 
   socket.on("drawPoint", function(data) {
