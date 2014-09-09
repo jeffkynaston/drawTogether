@@ -1,0 +1,65 @@
+doctype html
+html
+  head
+    link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans')
+    link(rel='stylesheet', href='/css/chat.css')
+    link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css')
+    script(src='//code.jquery.com/jquery-1.11.0.min.js')
+    script(src='/socket.io/socket.io.js')
+    script(src='/js/index.js')    
+    script(src='/js/canvas.js')    
+    script(src='/js/options.js')    
+    title drawTogther
+  body
+    h1 drawTogether
+    #drawing-side
+      #options
+        #tools
+            #pen.tool-button.current-option-tool
+              i.fa.fa-paint-brush
+            #pencil.tool-button
+              i.fa.fa-pencil
+            #eraser.tool-button
+              i.fa.fa-eraser
+          #colors
+            #green.color-button
+            #gray.color-button
+            #pink.color-button
+            #orange.color-button
+            #blue.color-button.current-option-color
+          #sizes
+            #size-two.size-button
+              i.fa.fa-circle
+            #size-five.size-button.current-option-size
+              i.fa.fa-circle
+            #size-ten.size-button
+              i.fa.fa-circle
+            #size-twenty.size-button
+              i.fa.fa-circle
+      #canvasDiv.color-button
+      #options
+        #admins
+          #save.admin-button
+            a(href='#', download='drawwithme.png')
+              i.fa.fa-save
+          #undo.admin-button
+            i.fa.fa-undo
+          #redo.admin-button
+            i.fa.fa-repeat
+          #clear.admin-button
+            i.fa.fa-trash-o
+
+    #chat-side
+      div
+        #participants-list.inlineBlock.topAligned
+          b Drawing With:
+          br
+          div#participants
+        div.inlineBlock
+          span
+            input(type="text", value="Your Name")#name
+          br
+          form#messageForm
+            textarea(rows="4", cols="50", placeholder="Share something!", maxlength=200)#outgoingMessage
+            input(type="button", value="Share", disabled=true)#send
+      div#messages

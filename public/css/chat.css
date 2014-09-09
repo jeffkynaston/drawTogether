@@ -1,0 +1,246 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+	font-weight: thin;
+	color: #717574;
+	width: 950px;
+	margin: 0px auto;
+}
+
+h1 {
+	text-align: center;
+}
+
+/* chat */
+textarea {
+  resize: none;
+}
+
+#chat-side {
+	width: 330px;
+	float: left;
+	margin-left: 10px;
+	padding-top: 0em;
+}
+
+#chat-size {
+	position: relative;
+}
+
+#chat-side span {
+	width: 220px;
+	margin: auto;
+}
+
+input[type="text"] { 
+	background: rgba(200,200,200,0.2); 
+	padding: 2%;
+	border: none;
+	outline: none;
+	color: #717574;
+	font-size: 1em;
+	margin-bottom: 1em;
+	text-align: center;
+	width: 96%;
+}
+
+input[type="button"] { 
+	background: rgba(200,200,200,0.2); 
+	padding: .7em;
+	border: none;
+	outline: none;
+	color: #717574;
+	font-size: .9em;
+	margin: 0.5em 0em;
+	width: 100%;
+	text-align: center;
+}
+
+input[type="button"]:hover {
+	background: rgba(152,33,222,0.7);
+	color: #fff;
+  cursor:pointer;
+}
+
+textarea:focus,
+input[type="text"]:focus {
+	border: 1px solid #717574;
+}
+
+textarea {
+	background: rgba(200,200,200,0.2); 
+	padding: 1.3em;
+	border: none;
+	outline: none;
+	color: #717574;
+	font-size: .8em;
+	margin: auto;
+	width: 296px;
+}
+
+.inlineBlock {
+ display: inline-block;
+}
+
+.topAligned {
+ vertical-align: top;
+}
+
+#participants {
+	margin-bottom: 1em;
+	position: relative;
+	color: rgba(152,33,222,0.7);;
+}
+
+#participants-list {
+	width: 150px;
+	margin-left: 2em;
+	text-align: left;
+}
+
+#messages {
+	font-size: .8em;
+	height: 310px;
+	overflow: auto;
+}
+/* canvas */
+
+#save a {
+	text-decoration: none;
+	color: #717574;
+}
+
+#drawing-side {
+	width: 610px;
+	float: left;
+}
+
+canvas {
+	margin: auto;
+	border: 2px solid #717574;
+}
+
+#canvasDiv {
+}
+.tool-button {
+	display: inline-block;
+	width: 30px;
+	font-size: 1.4em;
+	margin-right: .4em;
+}
+
+#admins {
+	display: block;
+	width: 300px;
+	margin: 0px auto;
+}
+
+.admin-button {
+	text-align: center;
+	display: inline;
+	width: 30px;
+	font-size: 1.7em;
+	margin: 0px .7em;
+}
+
+#save a:hover,
+.admin-button:hover {
+	color: #9821DE;
+  cursor:pointer;
+}
+
+.color-button {
+	display: inline-block;
+	width: 60px;
+	height: 1.75em;
+	margin-left: .4em;
+}
+
+.size-button {
+	display: inline-block;
+	width: 30px;
+}
+
+.current-option-tool,
+.current-option-size {
+	color: #9821DE;
+}
+
+.current-option-color {
+	border-bottom: 3px solid #9821DE;
+	box-shadow: 0 0 0 2px #fff inset;
+}
+
+#options {
+	display: block;
+	width: 600px;
+	margin: 10px 0px;
+	padding: 5px 0px;
+	position: relative;
+}
+
+#tools {
+	display: inline;
+	position: relative;
+	text-align: center;
+	font-size: 1.3em;
+	margin-left: .5em;
+}
+
+#colors {
+	display: inline;
+	position: relative;
+	padding: 5px 0px;
+}
+
+#sizes {
+	display: inline;
+	position: relative;
+	margin-left: .5em;
+	text-align: center;
+}
+
+#size-two {
+	font-size: .7em;
+}
+
+#size-five {
+	font-size: 1em;
+	/*border-radius: 12px;
+	height: 12px;
+	width: 12px;*/
+}
+
+#size-ten {
+	font-size: 1.3em;
+/*	border-radius: 15px;
+	height: 15px;
+	width: 15px;*/
+}
+
+#size-twenty {
+	font-size: 1.6em;
+	/*border-radius: 18px;
+	height: 18px;
+	width: 18px;*/
+}
+
+#green {
+	background-color: #06FF0C;
+}
+
+#gray {
+	background-color: #717574;
+}
+
+#pink {
+	background-color: #FF0D61;
+}
+
+#orange {
+	background-color: #FF5000;
+}
+
+#blue {
+	background-color: #12BAFF;
+}
