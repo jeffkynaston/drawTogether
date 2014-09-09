@@ -6,6 +6,21 @@ var express = require("express")
   , _ = require("underscore");
 
 var participants = [];
+var mainCanvas = {
+	"width": "600px",
+	"height": "450px"
+}
+var pointsDrawn = []
+var	undoPointStore = []
+var paint;
+var colorGreen = "#06FF0C";
+var colorGray = "#717574";
+var colorPink = "#FF0D61";
+var colorOrange = "#FF5000";
+var colorBlue = "#12BAFF";
+var curColor = colorBlue;
+var curSize = 5
+var curTool = "pen";
 
 app.set('port', process.env.PORT || 8080);
 app.use(bodyParser.json());
@@ -43,31 +58,24 @@ app.post("/message", function(request, response) {
 /* Socket.IO events */
 io.on("connection", function(socket){
   
-  /*
-    When a new user connects to our server, we expect an event called "newUser"
-    and then we'll emit an event called "newConnection" with a list of all 
-    participants to all connected clients
-  */
   socket.on("newUser", function(data) {
     participants.push({id: data.id, name: data.name});
-    io.sockets.emit("newConnection", {participants: participants});
+    io.sockets.emit("newConnection", {participants: participants, pointsDrawn: pointsDrawn});
   });
 
-  /*
-    When a user changes his name, we are expecting an event called "nameChange" 
-    and then we'll emit an event called "nameChanged" to all participants with
-    the id and new name of the user who emitted the original message
-  */
+  socket.on("drawPoint", function(data) {
+  	pointsDrawn = data.pointsDrawn
+  	undoPointStore = data.undoPointStore
+  	io.sockets.emit("redrawFrame", {pointsDrawn: pointsDrawn, undoPointStore: undoPointStore})
+  });
+
+  
+
   socket.on("nameChange", function(data) {
     _.findWhere(participants, {id: socket.id}).name = data.name;
     io.sockets.emit("nameChanged", {id: data.id, name: data.name});
   });
 
-  /* 
-    When a client disconnects from the server, the event "disconnect" is automatically 
-    captured by the server. It will then emit an event called "userDisconnected" to 
-    all participants with the id of the client that disconnected
-  */
   socket.on("disconnect", function() {
     participants = _.without(participants,_.findWhere(participants, {id: socket.id}));
     io.sockets.emit("userDisconnected", {id: socket.id, sender:"system"});
@@ -76,7 +84,6 @@ io.on("connection", function(socket){
 });
 
 
-//Start the http server at port and IP defined before
 http.listen(process.env.PORT || 8080, function() {
   console.log("Server up and running.");
 });

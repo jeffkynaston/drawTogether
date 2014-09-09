@@ -70,14 +70,37 @@ function bindMoveMouse() {
 });
 }
 
+// function bindMouseDown() {
+// 	$('#canvas').mousedown(function(e){
+//   var mouseX = e.pageX - this.offsetLeft;
+//   var mouseY = e.pageY - this.offsetTop;
+//   paint = true;
+//   socket.emit('drawPoint', {"x": mouseX, "y": mouseY, "dragged": false});
+// });
+// }
+
+// function bindMoveMouse() {
+// 	$('#canvas').mousemove(function(e){
+//   if(paint){
+//   	socket.emit('drawPoint', {"x": e.pageX - this.offsetLeft, "y": e.pageY - this.offsetTop, "dragged": false});
+//     addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+//     redraw();
+//   }
+// });
+// }
+
+
+
 function bindMouseUp() {
 	$('#canvas').mouseup(function(e){
+		socket.emit('drawPoint', {"pointsDrawn": pointsDrawn, "undoPointStore": undoPointStore});
   	paint = false;
 	});
 }
 
 function bindMouseLeave() {
 	$('#canvas').mouseleave(function(e){
+		socket.emit('drawPoint', {"pointsDrawn": pointsDrawn, "undoPointStore": undoPointStore});
   	paint = false;
 	});
 }
@@ -139,7 +162,7 @@ function unDo() {
 		}
 		undoPointStore.push(pointsDrawn.pop())
 	}
-	redraw()
+	socket.emit('drawPoint', {"pointsDrawn": pointsDrawn, "undoPointStore": undoPointStore});
 }
 
 function reDo() {
@@ -150,12 +173,16 @@ function reDo() {
 		}
 		pointsDrawn.push(undoPointStore.pop())
 	}
-	redraw()
+	socket.emit('drawPoint', {"pointsDrawn": pointsDrawn, "undoPointStore": undoPointStore});
 
 }
 
 function clearDrawing() {
+	for (i=(pointsDrawn.length - 1);i>= 0;i--) {
+		undoPointStore.push(pointsDrawn.pop())
+	}
 	pointsDrawn.length = 0
+	socket.emit('drawPoint', {"pointsDrawn": pointsDrawn, "undoPointStore": undoPointStore});
 }
 
 function saveDrawing() {

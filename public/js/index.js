@@ -1,7 +1,7 @@
 function init() {
 
   var serverBaseUrl = document.domain;
-  var socket = io.connect(serverBaseUrl);
+  socket = io.connect(serverBaseUrl);
   var sessionId = '';
 
   //Helper function to update the participants' list
@@ -20,6 +20,26 @@ function init() {
 
   socket.on('newConnection', function (data) {    
     updateParticipants(data.participants);
+    pointsDrawn = data.pointsDrawn
+    redraw();
+  });
+
+  socket.on('redrawFrame', function (data) { 
+      pointsDrawn = data.pointsDrawn
+      undoPointStore = data.undoPointStore
+      redraw();
+  });
+
+  socket.on('updateClientOptions', function (data) { 
+      pointsDrawn = data.pointsDrawn
+      console.log(data)
+      curColor = data.curColor
+      curTool = data.curTool
+      curSize = data.curSize
+      updateCurrentTool()
+      updateCurrentColor()
+      updateCurrentSize()
+      redraw();
   });
 
   socket.on('userDisconnected', function(data) {
