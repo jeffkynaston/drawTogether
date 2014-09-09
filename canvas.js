@@ -7,12 +7,10 @@ window.onload=function(){
 
 var mainCanvas = {
 	"width": "600px",
-	"height": "600px"
+	"height": "450px"
 }
 var pointsDrawn = []
-var	unDoPointStore = []
-
-
+var	undoPointStore = []
 
 var clickX = new Array();
 var clickY = new Array();
@@ -140,21 +138,21 @@ function clearCanvas() {
 function unDo() {
 	for (i=(pointsDrawn.length - 1);i>= 0;i--) {
 		if (pointsDrawn[i]["dragged?"] == false) {
-			unDoPointStore.push(pointsDrawn.pop())
+			undoPointStore.push(pointsDrawn.pop())
 			break
 		}
-		unDoPointStore.push(pointsDrawn.pop())
+		undoPointStore.push(pointsDrawn.pop())
 	}
 	redraw()
 }
 
 function reDo() {
-	for (i=(unDoPointStore.length - 2);i>= 0;i--) {
-		if (unDoPointStore[i]["dragged?"] == false) {
-			pointsDrawn.push(unDoPointStore.pop())
+	for (i=(undoPointStore.length - 2);i>= 0;i--) {
+		if (undoPointStore[i]["dragged?"] == false) {
+			pointsDrawn.push(undoPointStore.pop())
 			break
 		}
-		pointsDrawn.push(unDoPointStore.pop())
+		pointsDrawn.push(undoPointStore.pop())
 	}
 	redraw()
 
