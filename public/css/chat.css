@@ -90,17 +90,20 @@ textarea {
 	margin-bottom: 1em;
 	position: relative;
 	color: rgba(152,33,222,0.7);;
+	overflow: auto;
+	height: 75px;
+	margin-left: 1em;
 }
 
 #participants-list {
-	width: 150px;
-	margin-left: 2em;
+	width: 310px;
+	margin-left: 1em;
 	text-align: left;
 }
 
 #messages {
 	font-size: .8em;
-	height: 310px;
+	height: 260px;
 	overflow: auto;
 }
 /* canvas */
