@@ -90,24 +90,24 @@ $(document).on('ready', init);
 
 
 function combinePointArrays(data) {
-  // var regularPointHolder = []
-  // var undoPointHolder = []
-  // _.each(pointsDrawn, function(point){ 
-  //   if (point["stored?"] = false) {
-  //     regularPointHolder.push(point)
-  //   }
-  // });
-  //  _.each(undoPointStore, function(point){ 
-  //   if (point["stored?"] = false) {
-  //     undoPointHolder.push(point)
-  //   }
-  // });
+  var regularPointHolder = []
+  var undoPointHolder = []
+  _.each(pointsDrawn, function(point){ 
+    if (point["stored?"] = false) {
+      regularPointHolder.push(point)
+    }
+  });
+   _.each(undoPointStore, function(point){ 
+    if (point["stored?"] = false) {
+      undoPointHolder.push(point)
+    }
+  });
   pointsDrawn = data.pointsDrawn
   undoPointStore = data.undoPointStore
-  // _.each(regularPointHolder, function(point){ 
-  //   pointsDrawn.push(point)
-  // });
-  //  _.each(undoPointHolder, function(point){ 
-  //     undopointStore.push(point)
-  // });
+  _.each(regularPointHolder, function(point){ 
+    pointsDrawn.push(point)
+  });
+   _.each(undoPointHolder, function(point){ 
+      undopointStore.push(point)
+  });
 }
