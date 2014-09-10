@@ -46,7 +46,7 @@ io.on("connection", function(socket){
   socket.on("drawPoint", function(data) {
   	pointsDrawn = data.pointsDrawn
   	undoPointStore = data.undoPointStore
-  	io.sockets.emit("redrawFrame", {pointsDrawn: pointsDrawn, undoPointStore: undoPointStore})
+  	socket.broadcast.emit("redrawFrame", {pointsDrawn: pointsDrawn, undoPointStore: undoPointStore})
   });
 
   socket.on("nameChange", function(data) {
