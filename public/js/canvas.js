@@ -137,6 +137,7 @@ function unDo() {
 	}
 	_.each(pointsDrawn, function(point){ point["stored?"] = true });
   _.each(undoPointStore, function(point){ point["stored?"] = true });
+  redraw()
 	socket.emit('drawPoint', {"pointsDrawn": pointsDrawn, "undoPointStore": undoPointStore});
 }
 
@@ -150,6 +151,7 @@ function reDo() {
 	}
 	_.each(pointsDrawn, function(point){ point["stored?"] = true });
   _.each(undoPointStore, function(point){ point["stored?"] = true });
+  redraw()
 	socket.emit('drawPoint', {"pointsDrawn": pointsDrawn, "undoPointStore": undoPointStore});
 
 }
@@ -161,6 +163,7 @@ function clearDrawing() {
 	pointsDrawn.length = 0
 	_.each(pointsDrawn, function(point){ point["stored?"] = true });
   _.each(undoPointStore, function(point){ point["stored?"] = true });
+  redraw()
 	socket.emit('drawPoint', {"pointsDrawn": pointsDrawn, "undoPointStore": undoPointStore});
 }
 
