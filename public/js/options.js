@@ -149,19 +149,20 @@ function bindAdminOptions() {
 }
 
 function updateCursor(escapeCode) {
-	  var canvas = document.createElement("canvas");
-    canvas.width = 30;
-    canvas.height = 30;
-    var ctx = canvas.getContext("2d");
+	  var cursorCanvas = document.createElement("canvas");
+    cursorCanvas.width = 50;
+    cursorCanvas.height = 50;
+    var ctx = cursorCanvas.getContext("2d");
+ 		ctx.rotate(Math.PI/2);
     if (curTool == "pen") {
     	ctx.fillStyle = curColor;
     } else {
     	ctx.fillStyle = "#717574";
     }
-    ctx.font = "24px FontAwesome";
+    ctx.font = "30px FontAwesome";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText(escapeCode, 15, 15);
-    var dataURL = canvas.toDataURL('image/png')
+    ctx.fillText(escapeCode, 15, -19);
+    var dataURL = cursorCanvas.toDataURL('image/png')
     $('canvas').css('cursor', 'url('+dataURL+'), auto');
 }
