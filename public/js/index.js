@@ -1,3 +1,5 @@
+$(document).on('ready', init);
+
 function init() {
 
   var serverBaseUrl = document.domain;
@@ -86,19 +88,16 @@ function init() {
 
 }
 
-$(document).on('ready', init);
-
-
 function combinePointArrays(data) {
   var regularPointHolder = []
   var undoPointHolder = []
   _.each(pointsDrawn, function(point){ 
-    if (point["stored?"] = false) {
+    if (point["stored?"] == false) {
       regularPointHolder.push(point)
     }
   });
    _.each(undoPointStore, function(point){ 
-    if (point["stored?"] = false) {
+    if (point["stored?"] == false) {
       undoPointHolder.push(point)
     }
   });
